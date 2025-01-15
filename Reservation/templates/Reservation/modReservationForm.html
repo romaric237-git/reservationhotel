@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'Reservation/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'Reservation/form.css' %}" />
+    <title>Réservation</title>
+  </head>
+  <body>
+
+    <section id="step2" class="section__container booking__container">
+        <h2 class="section__header">Choix de la chambre</h2>
+        <form action="/" class="booking__form" id="form-2">
+            <input type="hidden" id="reservation-id" value="{{ reservation.pk }}">
+            <div class="input__group">
+                <span><i class="ri-calendar-2-fill"></i></span>
+                <div>
+                    <label for="Arrivée">Arrivée</label>
+                    <input type="date" placeholder="Arrivée" id="check-in" value="{{ reservation.checkIn|date:"Y-m-d" }}" required/>
+                </div>
+            </div>
+            <div class="input__group">
+                <span><i class="ri-calendar-2-fill"></i></span>
+                <div>
+                    <label for="Départ">Départ</label>
+                    <input type="date" placeholder="Départ" id="check-out" value="{{ reservation.checkOut|date:"Y-m-d" }}" required/>
+                </div>
+            </div>
+            <div class="input__group input__btn">
+                <div>
+                    <label for="nbpersonnes">Nombre de personnes</label>
+                    <select id="nb-pers" class="room-selection-option">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input__group input__btn">
+                <div>
+                    <button class="btn accordion-button">Préférences</button>
+                    <div class="accordion-content">
+                        <div>
+                            <label for="pref1">Lit double</label>
+                            <input type="checkbox" id="pref1" class="room-selection-option" {% if reservation.room.doubleBed %}checked{% endif %} />
+                        </div>
+                        <div>
+                            <label for="pref2">Vue sur la mer</label>
+                            <input type="checkbox" id="pref2" class="room-selection-option" {% if reservation.room.oceanView %}checked{% endif %} />
+                        </div>
+                        <div>
+                            <label for="pref3">Étage élevé</label>
+                            <input type="checkbox" id="pref3" class="room-selection-option" {% if reservation.room.roof >= 2 %}checked{% endif %} />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn accordion-button">Options supplémentaires</button>
+                    <div class="accordion-content">
+                        {% for service in services %}
+                        <div>
+                            <label for="supp{{ service.pk }}">{{ service.name }} | {{ service.price_over }}</label>
+                            <input type="checkbox" id="supp{{ service.pk }}" {% if service in reservation.services.all %}checked{% endif %} />
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="list">
+                    <label>Chambres disponibles</label>
+                    <ul class="room-list" data-selection="room-{{ reservation.room.pk }}">
+                        
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="input__group input__btn">
+                <button class="btn" id="next-2">Sauvegarder</button>
+                <span style="background-color: red; color: white; font-size: 15px;" id="errorMsg2"></span>
+            </div>
+        </form>
+    </section>
+
+    <div id="loading" class="loading"></div>
+    
+    <script src="{% static 'Reservation/jquery-3.7.0.min.js' %}" type="Application/javascript"></script>
+    <script src="{% static 'Reservation/modReservationForm.js' %}" type="Application/javascript"></script>
+  </body>
+</html>

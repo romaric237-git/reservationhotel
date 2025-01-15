@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmation de la réservation</title>
+  </head>
+</style>
+  <body>
+    <style>
+    
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+        background-color: #e82574;
+        font-family: "Poppins", sans-serif;
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .section__container {
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 80%;
+      margin: auto;
+      padding: 7rem 2rem;
+      background-color: white;
+      border-radius: 25px;
+    }
+    span {
+        color: #e82574;
+        padding: 1rem;
+        border-radius: 5px;
+    }
+</style>
+    <div class="section__container">
+        <p>Merci {{ name }} ! Votre réservation est enregistrée.</p>
+
+        <p class="section__header">Le code vous permettant de la confirmer est : <span>{{ code }}</span></p>
+
+        <p>Hôtel de l'océan.</p>
+    </div>
+  </body>
+</html>

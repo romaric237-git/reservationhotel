@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'Reservation/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'Reservation/form.css' %}" />
+    <title>Réservation</title>
+  </head>
+  <body>
+
+    <section id="step1" class="section__container booking__container">
+        <h2 class="section__header">Veuillez entrer votre adresse e-mail</h2>
+        <form action="/" class="booking__form" id="form-1">
+            {% csrf_token %}
+            <div class="input__group">
+                <span><i class="ri-user-fill"></i></span>
+                <div>
+                    <label for="email">Adresse e-mail</label>
+                    <input type="email" placeholder="Adresse e-mail" id="email" required/>
+                </div>
+            </div>
+                <button class="btn" id="next-1">Continuer</button>
+                <span style="background-color: red; color: white; font-size: 15px;" id="errorMsg1"></span>
+            </div>
+        </form>
+    </section>
+
+    <section id="step2" class="section__container booking__container hide">
+        <h2 class="section__header">Inscrivez-vous</h2>
+        <form action="/" class="booking__form" id="form-2">
+            <div class="input__group">
+                <span><i class="ri-user-fill"></i></span>
+                <div>
+                    <label for="Nom">Nom</label>
+                    <input type="text" placeholder="Nom" id="lastname" required/>
+                </div>
+            </div>
+            <div class="input__group">
+                <span><i class="ri-user-fill"></i></span>
+                <div>
+                    <label for="Prénom">Prénom</label>
+                    <input type="text" placeholder="Prénom" id="firstname" required/>
+                </div>
+            </div>
+            <div class="input__group">
+                <span><i class="ri-user-fill"></i></span>
+                <div>
+                    <label for="phonenumber">Numéro de téléphone</label>
+                    <input type="number"  placeholder="Numéro de téléphone" id="phonenumber" required/>
+                </div>
+            </div>
+            <div class="input__group input__btn">
+            <button class="btn" id="next-2">Continuer</button>
+            <span style="background-color: red; color: white; font-size: 15px;" id="errorMsg2"></span>
+            </div>
+        </form>
+    </section>
+
+    <section id="step3" class="section__container booking__container hide">
+        <h2 class="section__header">Méthode de confirmation</h2>
+        <form action="/" class="booking__form">
+            <div class="input__group input__btn">
+                <button class="btn" id="next-3">Confirmer par email</button>
+            </div>
+            <div class="input__group input__btn">
+                <button class="btn" id="next-4">Confirmer par sms</button>
+            </div>
+            <span style="background-color: red; color: white; font-size: 15px;" id="errorMsg3"></span>
+        </form>
+    </section>
+
+    <section id="step4" class="section__container booking__container hide">
+        <h2 class="section__header">Confirmation</h2>
+        <form action="/" class="booking__form">
+            <div class="input__group input__btn">
+                <label for="code">Code de confirmation</label>
+                <input type="text" id="confirmationCode" placeholder="XXXX"/>
+                <span style="background-color: red; color: white; font-size: 15px;" id="errorMsg4"></span>
+            </div>
+            <div class="input__group input__btn">
+                <button class="btn" id="next-5">Confirmer le code</button>
+            </div>
+        </form>
+    </section>
+    
+    <div id="loading" class="loading"></div>
+    
+    <script src="{% static 'Reservation/jquery-3.7.0.min.js' %}" type="Application/javascript"></script>
+    <script src="{% static 'Reservation/login.js' %}" type="Application/javascript"></script>
+  </body>
+</html>

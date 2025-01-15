@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    {% load humanize %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'Reservation/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'Reservation/form.css' %}" />
+    <title>Mes réservations</title>
+  </head>
+  <body>
+
+    <header class="header">
+        <nav>
+          <div class="nav__bar">
+            <div class="logo">
+              <a href="#"><img src="{% static 'Reservation/assets/logo.png' %}" alt="logo" /></a>
+            </div>
+            <div class="nav__menu__btn" id="menu-btn">
+              <i class="ri-menu-line"></i>
+            </div>
+          </div>
+          <ul class="nav__links" id="nav-links">
+            <li><a href="{% url 'Reservation:index' %}">Accueil</a></li>
+            <li><a href="{% url 'Reservation:index' %}">À propos</a></li>
+            <!--<li><a href="{% url 'Reservation:index' %}">Services</a></li>-->
+            <!--<li><a href="{% url 'Reservation:index' %}">Explorer</a></li>-->
+            <li><a href="{% url 'Reservation:index' %}">Contact</a></li>
+            <li><button class="btn" onclick="window.location.href='{% url 'Reservation:myReservations' %}'">Vos réservations</button></li>
+          </ul>
+        </nav>
+        </div>
+      </header>
+      
+
+    <section class="section__container booking__container">
+        <h2 class="section__header">{{ client.firstname }} {{ client.lastname }}</h2>
+        <button class="btn" id="logoutBtn">Se déconnecter</button>
+    </section>
+
+    <section class="section__container booking__container">
+        <h2 class="section__header">Réservation(s) en attente</h2>
+        <ul class="room-list" data-selection="">
+            {% for reservation in reservations_incoming %}
+            <li id="reservation-{{ reservation.pk }}">
+                <img src="{{ reservation.room.image.url }}" alt="{{ reservation.room.name }}">
+                <p>{{ reservation.room.name }}<br><span>{{ reservation.total_cost|intcomma }}</span></p>
+                <p>{{ reservation.checkIn }}</p>
+                <p>{{ reservation.checkOut }}</p>
+                {% if not reservation.confirmed %}
+                  <p>Non confirmé</p>
+                {% endif %}
+            </li>
+            {% empty %}
+            Pas de réservations en cours
+            {% endfor %}
+        </ul>
+        <div style="margin-top: 20px;">
+            <button class="btn hide" id="modifyBtn">Modifier</button>
+            <button class="btn hide" id="cancelBtn">Annuler</button>
+        </div>
+        <button class="btn" onclick="window.location.href='{% url 'Reservation:reservationForm' %}'">Réserver maintenant</button>
+    </section>
+
+    <section class="section__container booking__container">
+        <button class="btn accordion-button">Réservations passées</button>
+        <div class="accordion-content">
+            <ul class="room-list" data-selection="">
+              {% for reservation in reservations_passed %}
+              <li id="reservation-{{ reservation.pk }}">
+                  <img src="{{ reservation.room.image.url }}" alt="{{ reservation.room.name }}">
+                  <p>{{ reservation.room.name }}<br><span>{{ reservation.room.price|intcomma }} FCFA</span></p>
+                  <p>{{ reservation.checkIn }}</p>
+                  <p>{{ reservation.checkOut }}</p>
+              </li>
+              {% empty %}
+              Pas de réservations antérieures
+              {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <div id="loading" class="loading"></div>
+    
+    <script src="{% static 'Reservation/jquery-3.7.0.min.js' %}" type="Application/javascript"></script>
+    <script src="{% static 'Reservation/myReservations.js' %}" type="Application/javascript"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{% static 'Reservation/main.js' %}" type="Application/javascript"></script>
+  </body>
+</html>

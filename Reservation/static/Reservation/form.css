@@ -1,0 +1,111 @@
+input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+}
+select {
+    /*display: block;*/
+    width: 100%;
+    max-width: 150px;
+    padding-block: 5px;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    outline: none;
+    border: none;
+}
+.section__container {
+    margin-top: 10%;
+}
+.booking__form {
+    transform: none;
+}
+.input__group {
+    flex: 1 1 500px;
+}
+.input__group div {
+    flex: 1 1 400px
+}
+.input__group input {
+    width: 90%;
+    max-width: 400px;
+}
+.accordion {
+    display: flex;
+    flex-direction: column;
+}
+.accordion-button {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Ajoutez une transition pour l'effet de glissade */
+}
+.accordion-button {
+    color: black;
+}
+.accordion-button:hover {
+    background-color: #ddd; /* Changez la couleur au survol */
+}
+.accordion-content {
+    max-height: 0; /* Cachez le contenu par défaut */
+    overflow: hidden;
+    transition: max-height 0.3s; /* Ajoutez une transition pour l'effet de glissade */
+}
+.accordion-content div input {
+    width: auto;
+    display: inline;
+}
+.active {
+    max-height: 1000px; /* Ajustez la hauteur maximale pour afficher le contenu */
+}
+.room-list {
+    display: flex;
+    flex-direction: column;
+}
+.room-list li {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid gray;
+    cursor: pointer;
+}
+.room-list li.selected {
+    background-color: var(--primary-color);
+    color: white;
+}
+.room-list li img {
+    width: 100px;
+    height: auto;
+    padding: 5px;
+}
+.room-list p {
+    margin: 20px;
+}
+.room-list span {
+    opacity: 0.5;
+}
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.list label {
+    font-weight: 800;
+    font-size: 2rem;
+    text-decoration: underline;
+}
+.hide {
+    display: none;
+}
+.loading {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid var(--primary-color);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    animation: spin 1s linear infinite;
+    margin: auto;
+    display: none;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
